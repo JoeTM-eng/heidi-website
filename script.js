@@ -5,6 +5,25 @@ const cartItems = document.querySelector('#cart-items');
 const cartCount = document.querySelector('#cart-count');
 const drawerCount = document.querySelector('#drawer-count');
 const cartTotal = document.querySelector('#cart-total');
+const artCards = document.querySelectorAll('.art-card');
+artCards.forEach((card) => { card.dataset.collection = card.dataset.collection || 'dreams'; });
+const artworkNames = { '1': 'dusk', '2': 'dawn', '3': 'a dream', '4': 'april in bloom', '5': 'animal friends' };
+artCards.forEach((card) => {
+  const name = artworkNames[card.dataset.id];
+  if (!name) return;
+  card.dataset.title = name;
+  card.querySelector('.art-meta h3').textContent = name;
+  const kind = card.querySelector('.art-option.active').dataset.kind;
+  card.querySelector('.quick-add').setAttribute('aria-label', `Add ${name} ${kind} to bag`);
+});
+artCards.forEach((card) => {
+  if (card.dataset.collection !== 'still-life') return;
+  card.dataset.priceOriginal = '30';
+  card.querySelector('.art-meta strong').textContent = '£30';
+  card.querySelector('.art-option[data-kind="original"] span').textContent = '£30';
+  card.querySelector('.print-size select option').value = '9';
+  card.querySelector('.print-size select option').textContent = '10 cm x 10 cm · £9';
+});
 
 lucide.createIcons();
 
@@ -64,6 +83,7 @@ document.querySelectorAll('.quick-add').forEach((button) => {
 
 document.querySelectorAll('.art-option').forEach((option) => {
   option.addEventListener('click', () => {
+    if (option.disabled) return;
     const card = option.closest('.art-card');
     const kind = option.dataset.kind;
     const sizePicker = card.querySelector('.print-size');
@@ -84,9 +104,32 @@ document.querySelectorAll('.print-size select').forEach((select) => {
   });
 });
 
+const collectionTabs = document.querySelectorAll('.collection-tab');
+const collectionPanels = document.querySelectorAll('[role="tabpanel"]');
+const itemCount = document.querySelector('#item-count');
+
+collectionTabs.forEach((tab) => {
+  tab.addEventListener('click', () => {
+    const collection = tab.dataset.collection;
+    const visibleCards = [...artCards].filter((card) => card.dataset.collection === collection);
+    collectionTabs.forEach((collectionTab) => {
+      const isActive = collectionTab === tab;
+      collectionTab.classList.toggle('active', isActive);
+      collectionTab.setAttribute('aria-selected', String(isActive));
+    });
+    artCards.forEach((card) => { card.hidden = card.dataset.collection !== collection; });
+    collectionPanels.forEach((panel) => { panel.hidden = panel.id !== `collection-${collection}`; });
+    itemCount.textContent = visibleCards.length;
+  });
+});
+
 document.querySelector('#newsletter-form').addEventListener('submit', (event) => {
   event.preventDefault();
-  document.querySelector('#form-message').textContent = 'You are on the list. Thank you.';
+  const email = document.querySelector('#email').value.trim();
+  const subject = encodeURIComponent('New newsletter signup');
+  const body = encodeURIComponent(`Please add ${email} to the newsletter list.`);
+  window.location.href = `mailto:artbyheidijoy@gmail.com?subject=${subject}&body=${body}`;
+  document.querySelector('#form-message').textContent = 'Your email app is opening to complete your signup.';
   event.target.reset();
 });
 
