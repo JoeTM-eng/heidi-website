@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Art by Heidi Joy </title>
+  <meta name="description" content="Original works and prints by Heidi Joy." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>:root { --ink: #4c644f; --vermilion: #c993a2; } .art-grid { grid-template-columns: repeat(3, 1fr); gap: 42px 24px; } .art-image { aspect-ratio: 4 / 3; } .art-options { display: flex; gap: 8px; margin-top: 14px; } .art-option { border: 1px solid var(--line); color: var(--muted); display: flex; flex: 1; font-size: 10px; justify-content: space-between; padding: 8px 9px; } .art-option span { color: var(--ink); } .art-option.active { border-color: var(--ink); color: var(--ink); } .print-size { display: none; margin-top: 10px; } .print-size.visible { display: block; } .print-size span { display: block; color: var(--muted); font-size: 10px; margin-bottom: 5px; } .print-size select { background: var(--white); border: 1px solid var(--line); color: var(--ink); font: inherit; font-size: 11px; padding: 8px; width: 100%; } @media (max-width: 800px) { .art-grid { grid-template-columns: repeat(2, 1fr); gap: 38px 14px; } }</style>
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div class="announcement">Free shipping on prints to the uk <span>↗</span></div>
+  <header class="site-header">
+    <a class="wordmark" href="#top" aria-label="Art by Heidi Joy">ART BY <em>HEIDI JOY</em></a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a href="#collection">Shop work</a>
+      <a href="#story">The studio</a>
+    </nav>
+    <div class="header-actions">
+      <button class="icon-button" aria-label="Search"><i data-lucide="search"></i></button>
+      <button class="cart-button" id="open-cart" aria-label="Open shopping bag">Bag <span id="cart-count">0</span></button>
+      <button class="menu-button" aria-label="Open menu"><i data-lucide="menu"></i></button>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Bristol 2026</p>
+        <h1>Origional<br /><i>Artwork</i></h1>
+        
+        <p class="hero-intro">From the one women team</p>
+        <a class="button button-dark" href="#collection">Explore the collection <i data-lucide="arrow-up-right"></i></a>
+        <div class="hero-note"><span class="line"></span><span>Made with love in Bristol, UK</span></div>
+      </div>
+      <div class="hero-art">
+        <img src="hero.jpg.JPG" alt="Heidi standing outdoors with her paintings" />
+        <div class="art-caption"><span>01</span><span>Heidi with her artwork</span></div>
+        <div class="stamp">A / 7</div>
+      </div>
+      <div class="hero-side-label">ORIGINALS + EDITIONS</div>
+    </section>
+
+    <section class="marquee" aria-label="Atelier statement"><div>ART FOR YOUR SPACE<span>✳</span> MADE TO LAST <span>✳</span> ART TO GIFT <span>✳</span> ART TO BRING JOY <span>✳</span>ART TO INSPIRE <span>✳</span>SHIPPED WITH CARE <span>✳</span>ART TO LOVE <span>✳</span>WOMEN OWNED <span>✳</span></div></section>
+
+    <section class="collection-section" id="collection">
+      <div class="section-heading">
+        <div><p class="eyebrow">The current collection</p><h2>Find your<br /><i>favourite.</i></h2></div>
+        <p class="section-description">Each piece is created with intention and care, designed to bring beauty and joy into your daily life.</p>
+      </div>
+      <div class="collection-toolbar">
+        <span class="collection-label">Originals and prints</span>
+        <span class="collection-label">Choose your format below</span>
+      </div>
+      <div class="art-grid" id="art-grid">
+        <article class="art-card" data-types="original print" data-id="1" data-title="Moon rabbit" data-price-original="65" data-image="bunny.JPG"><div class="art-image"><img src="bunny.JPG" alt="Pink rabbit painting beneath a moon and stars" /><span class="availability">Original · 1 of 1</span><button class="quick-add" aria-label="Add Moon rabbit original to bag"><i data-lucide="plus"></i></button></div><div class="art-meta"><div><h3>Moon rabbit</h3><p>Original or archival print</p></div><strong>£65</strong></div><div class="art-options" role="group" aria-label="Choose format for Moon rabbit"><button class="art-option active" data-kind="original">Original <span>£65</span></button><button class="art-option" data-kind="print">Print <span>Choose size</span></button></div><label class="print-size"><span>Print size</span><select><option value="13">A4 · £13</option><option value="15">A3 · £15</option><option value="9">A5 · £9</option></select></label></article>
+        <article class="art-card" data-types="original print" data-id="2" data-title="Swan lake" data-price-original="65" data-image="swan.JPG"><div class="art-image"><img src="swan.JPG" alt="Pink swan painting on a lake beneath a sunset" /><span class="availability">Original · 1 of 1</span><button class="quick-add" aria-label="Add Swan lake original to bag"><i data-lucide="plus"></i></button></div><div class="art-meta"><div><h3>Swan lake</h3><p>Original or archival print</p></div><strong>£65</strong></div><div class="art-options" role="group" aria-label="Choose format for Swan lake"><button class="art-option active" data-kind="original">Original <span>£65</span></button><button class="art-option" data-kind="print">Print <span>Choose size</span></button></div><label class="print-size"><span>Print size</span><select><option value="13">A4 · £13</option><option value="15">A3 · £15</option><option value="9">A5 · £9</option></select></label></article>
+        <article class="art-card" data-types="original print" data-id="3" data-title="Pink unicorn" data-price-original="85" data-image="unicorn.JPG"><div class="art-image"><img src="unicorn.JPG" alt="Pink unicorn painting in a green landscape" /><span class="availability">Original · 1 of 1</span><button class="quick-add" aria-label="Add Pink unicorn original to bag"><i data-lucide="plus"></i></button></div><div class="art-meta"><div><h3>Pink unicorn</h3><p>Original or archival print</p></div><strong>£85</strong></div><div class="art-options" role="group" aria-label="Choose format for Pink unicorn"><button class="art-option active" data-kind="original">Original <span>£85</span></button><button class="art-option" data-kind="print">Print <span>Choose size</span></button></div><label class="print-size"><span>Print size</span><select><option value="13">A4 · £13</option><option value="15">A3 · £15</option><option value="9">A5 · £9</option></select></label></article>
+        <article class="art-card" data-types="original print" data-id="4" data-title="Garden in bloom" data-price-original="65" data-image="flowers.JPG"><div class="art-image"><img src="flowers.JPG" alt="Colorful flower painting with roses and hydrangeas" /><span class="availability">Original · 1 of 1</span><button class="quick-add" aria-label="Add Garden in bloom original to bag"><i data-lucide="plus"></i></button></div><div class="art-meta"><div><h3>Garden in bloom</h3><p>Original or archival print</p></div><strong>£65</strong></div><div class="art-options" role="group" aria-label="Choose format for Garden in bloom"><button class="art-option active" data-kind="original">Original <span>£65</span></button><button class="art-option" data-kind="print">Print <span>Choose size</span></button></div><label class="print-size"><span>Print size</span><select><option value="13">A4 · £13</option><option value="15">A3 · £15</option><option value="9">A5 · £9</option></select></label></article>
+      </div>
+      <div class="collection-foot"><span>Showing <b id="item-count">4</b> works</span><a href="#collection">View all work <i data-lucide="arrow-right"></i></a></div>
+    </section>
+
+    <section class="studio-section" id="story">
+      <div class="studio-image"><img src="studio.JPG" alt="Heidi painting outdoors beside an easel" /><span>Studio notes, Bristol</span></div>
+      <div class="studio-copy"><p class="eyebrow">A note from the studio</p><h2>About<br /><i>me</i></h2><p>To finish desciption</p><p>Thank you for making room for it.</p></div>
+    </section>
+
+    <section class="newsletter" id="journal"><div><p class="eyebrow">Letters from the studio</p><h2>A good thing<br /><i>in your inbox.</i></h2></div><form id="newsletter-form"><label for="email">Occasional notes on new work, process, and the things keeping me curious.</label><div class="email-row"><input id="email" type="email" placeholder="Your email address" required /><button type="submit" aria-label="Subscribe"><i data-lucide="arrow-up-right"></i></button></div><p class="form-message" id="form-message"></p></form></section>
+  </main>
+
+  <footer class="site-footer"><a class="wordmark" href="#top">ART BY <em>HEIDI JOY</em></a><p>© 2026 ArtbyHeidiJoy</p><div><a href="https://www.instagram.com/artbyheidijoy/" target="_blank" rel="noopener noreferrer">Instagram</a><a href="https://www.tiktok.com/@artbyheidijoy" target="_blank" rel="noopener noreferrer">TikTok</a><a href="mailto:artbyheidijoy@gmail.com">artbyheidijoy@gmail.com</a><a href="#">Shipping + returns</a></div></footer>
+
+  <aside class="cart-drawer" id="cart-drawer" aria-label="Shopping bag" aria-hidden="true"><div class="drawer-header"><h2>Your bag <span id="drawer-count">0</span></h2><button id="close-cart" aria-label="Close shopping bag"><i data-lucide="x"></i></button></div><div class="cart-items" id="cart-items"><div class="empty-cart"><i data-lucide="shopping-bag"></i><p>Your bag is waiting for something beautiful.</p><a href="#collection" id="browse-work">Browse the work</a></div></div><div class="drawer-footer"><div><span>Subtotal</span><strong id="cart-total">$0</strong></div><button class="button button-dark checkout" id="checkout">Checkout <i data-lucide="arrow-up-right"></i></button><small>Shipping calculated at checkout.</small></div></aside><div class="drawer-overlay" id="drawer-overlay"></div>
+  <script src="script.js"></script>
+</body>
+</html>
