@@ -37,16 +37,17 @@ function configureSnipcartProduct(card) {
   const price = kind === 'original' ? Number(card.dataset.priceOriginal || 0) : Number(sizeSelect ? sizeSelect.value : 0);
   const pageUrl = new URL(window.location.href.split('#')[0]);
   const imageUrl = card.dataset.image ? new URL(card.dataset.image, pageUrl.href).href : pageUrl.href;
-  const itemName = `${card.dataset.title || card.querySelector('h3')?.textContent || 'Artwork'}${kind === 'original' ? ' - Original' : ` - Print - ${selectedSizeText}`}`;
+  const productTitle = card.dataset.title || card.querySelector('h3')?.textContent || 'Artwork';
+  const stableItemId = `art-${String(card.dataset.id).padStart(3, '0')}`;
 
   button.type = 'button';
   button.classList.add('snipcart-add-item');
-  button.dataset.itemId = `${card.dataset.id}-${kind}`;
+  button.dataset.itemId = stableItemId;
   button.dataset.itemPrice = String(price);
   button.dataset.itemUrl = pageUrl.href;
   button.dataset.itemDescription = kind === 'original' ? 'Original artwork' : `Archival print - ${selectedSizeText}`;
   button.dataset.itemImage = imageUrl;
-  button.dataset.itemName = itemName;
+  button.dataset.itemName = productTitle;
   button.dataset.itemQuantity = '1';
   button.dataset.itemShippable = 'true';
 }
