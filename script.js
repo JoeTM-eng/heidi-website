@@ -1,10 +1,3 @@
-const cart = [];
-const drawer = document.querySelector('#cart-drawer');
-const overlay = document.querySelector('#drawer-overlay');
-const cartItems = document.querySelector('#cart-items');
-const cartCount = document.querySelector('#cart-count');
-const drawerCount = document.querySelector('#drawer-count');
-const cartTotal = document.querySelector('#cart-total');
 const artCards = document.querySelectorAll('.art-card');
 artCards.forEach((card) => { card.dataset.collection = card.dataset.collection || 'dreams'; });
 const artworkNames = { '1': 'dusk', '2': 'dawn', '3': 'a dream', '4': 'april in bloom', '5': 'animal friends' };
@@ -31,55 +24,26 @@ function money(value) {
   return new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP', maximumFractionDigits: 0 }).format(value);
 }
 
-function updateCart() {
-  const count = cart.length;
-  cartCount.textContent = count;
-  drawerCount.textContent = count;
-  cartTotal.textContent = money(cart.reduce((total, item) => total + item.price, 0));
+function configureSnipcartProduct(card) {
+  const button = card.querySelector('.quick-add');
+  const activeOption = card.querySelector('.art-option.active');
+  const kind = activeOption.dataset.kind;
+  const sizeSelect = card.querySelector('.print-size select');
+  const price = kind === 'original' ? Number(card.dataset.priceOriginal) : Number(sizeSelect.value);
+  const size = kind === 'print' ? sizeSelect.options[sizeSelect.selectedIndex].text : '';
 
-  if (!count) {
-    cartItems.innerHTML = '<div class="empty-cart"><i data-lucide="shopping-bag"></i><p>Your bag is waiting for something beautiful.</p><a href="#collection" id="browse-work">Browse the work</a></div>';
-    lucide.createIcons();
-    return;
-  }
-
-  cartItems.innerHTML = cart.map((item, index) => `
-    <div class="cart-item">
-      <img src="${item.image}" alt="${item.title}" />
-      <div class="cart-item-info"><h3>${item.title}</h3><p>${item.type === 'original' ? 'Original artwork' : `Print · ${item.size}`}</p><strong>${money(item.price)}</strong></div>
-      <button class="remove-item" data-index="${index}" aria-label="Remove ${item.title}">Remove</button>
-    </div>`).join('');
-
-  document.querySelectorAll('.remove-item').forEach((button) => {
-    button.addEventListener('click', () => {
-      cart.splice(Number(button.dataset.index), 1);
-      updateCart();
-    });
-  });
+  button.classList.add('snipcart-add-item');
+  button.dataset.itemId = `${card.dataset.id}-${kind}`;
+  button.dataset.itemPrice = price;
+  button.dataset.itemUrl = window.location.href.split('#')[0];
+  button.dataset.itemDescription = kind === 'original' ? 'Original artwork' : `Archival print · ${size}`;
+  button.dataset.itemImage = card.dataset.image;
+  button.dataset.itemName = `${card.dataset.title} · ${kind === 'original' ? 'Original' : `Print · ${size}`}`;
+  button.dataset.itemQuantity = '1';
+  button.dataset.itemShippable = 'true';
 }
 
-function setDrawer(open) {
-  drawer.classList.toggle('open', open);
-  overlay.classList.toggle('open', open);
-  drawer.setAttribute('aria-hidden', String(!open));
-  document.body.style.overflow = open ? 'hidden' : '';
-}
-
-document.querySelector('#open-cart').addEventListener('click', () => setDrawer(true));
-document.querySelector('#close-cart').addEventListener('click', () => setDrawer(false));
-overlay.addEventListener('click', () => setDrawer(false));
-
-document.querySelectorAll('.quick-add').forEach((button) => {
-  button.addEventListener('click', () => {
-    const card = button.closest('.art-card');
-    const kind = card.querySelector('.art-option.active').dataset.kind;
-    const sizeSelect = card.querySelector('.print-size select');
-    const item = { title: card.dataset.title, price: kind === 'original' ? Number(card.dataset.priceOriginal) : Number(sizeSelect.value), image: card.dataset.image, type: kind, size: kind === 'print' ? sizeSelect.options[sizeSelect.selectedIndex].text : '' };
-    if (!cart.some((cartItem) => cartItem.title === item.title)) cart.push(item);
-    updateCart();
-    setDrawer(true);
-  });
-});
+artCards.forEach(configureSnipcartProduct);
 
 document.querySelectorAll('.art-option').forEach((option) => {
   option.addEventListener('click', () => {
@@ -94,13 +58,17 @@ document.querySelectorAll('.art-option').forEach((option) => {
     card.querySelector('.art-meta strong').textContent = money(kind === 'original' ? Number(card.dataset.priceOriginal) : Number(sizeSelect.value));
     card.querySelector('.availability').textContent = kind === 'original' ? 'Original · 1 of 1' : 'Print · Open edition';
     card.querySelector('.quick-add').setAttribute('aria-label', `Add ${card.dataset.title} ${kind} to bag`);
+    configureSnipcartProduct(card);
   });
 });
 
 document.querySelectorAll('.print-size select').forEach((select) => {
   select.addEventListener('change', () => {
     const card = select.closest('.art-card');
-    if (card.querySelector('.art-option.active').dataset.kind === 'print') card.querySelector('.art-meta strong').textContent = money(Number(select.value));
+    if (card.querySelector('.art-option.active').dataset.kind === 'print') {
+      card.querySelector('.art-meta strong').textContent = money(Number(select.value));
+      configureSnipcartProduct(card);
+    }
   });
 });
 
@@ -133,6 +101,3 @@ document.querySelector('#newsletter-form').addEventListener('submit', (event) =>
   event.target.reset();
 });
 
-document.querySelector('#checkout').addEventListener('click', () => {
-  if (cart.length) alert('Checkout is ready to connect to your payment provider.');
-});
