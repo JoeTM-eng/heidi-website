@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -28,7 +28,13 @@
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
-  <div class="announcement">Free shipping on prints to the uk <span>↗</span></div>
+  <div class="announcement">
+    <span>Free shipping on prints to the uk <span>↗</span></span>
+    <div class="announcement-links">
+      <a href="https://www.instagram.com/artbyheidijoy/" target="_blank" rel="noopener noreferrer">Instagram</a>
+      <a href="https://www.tiktok.com/@artbyheidijoy" target="_blank" rel="noopener noreferrer">TikTok</a>
+    </div>
+  </div>
   <header class="site-header">
     <a class="wordmark" href="#top" aria-label="Art by Heidi Joy">ART BY <em>HEIDI JOY</em></a>
     <nav class="main-nav" aria-label="Main navigation">
@@ -36,7 +42,6 @@
       <a href="#story">About me</a>
     </nav>
     <div class="header-actions">
-      <button class="icon-button" aria-label="Search"><i data-lucide="search"></i></button>
       <button class="cart-button snipcart-checkout" aria-label="Open shopping bag">Bag <span class="snipcart-items-count">0</span></button>
       <button class="menu-button" aria-label="Open menu"><i data-lucide="menu"></i></button>
     </div>
@@ -47,8 +52,9 @@
       <div class="hero-copy">
         <p class="eyebrow">Bristol 2026</p>
         <h1>Original <i>Artwork</i></h1>
-        
-        <p class="hero-intro">From the one women team</p>
+
+        <p class="hero-intro">From the one woman team</p>
+
         <a class="button button-dark" href="#collection">Explore the collection <i data-lucide="arrow-up-right"></i></a>
         <div class="hero-note"><span class="line"></span><span>Made with love in Bristol, UK</span></div>
       </div>
@@ -60,7 +66,7 @@
       <div class="hero-side-label">ORIGINALS + EDITIONS</div>
     </section>
 
-    <section class="marquee" aria-label="Atelier statement"><div>ART FOR YOUR SPACE<span>✳</span> MADE TO LAST <span>✳</span> ART TO GIFT <span>✳</span> ART TO BRING JOY <span>✳</span>ART TO INSPIRE <span>✳</span>SHIPPED WITH CARE <span>✳</span>ART TO LOVE <span>✳</span>WOMEN OWNED <span>✳</span></div></section>
+    <section class="marquee" aria-label="Atelier statement"><div>ART FOR YOUR SPACE<span>✳</span> MADE TO LAST <span>✳</span> ART TO GIFT <span>✳</span> ART TO BRING JOY <span>✳</span>ART TO INSPIRE <span>✳</span>SHIPPED WITH CARE <span>✳</span>ART TO LOVE <span>✳</span>WOMAN OWNED <span>✳</span></div></section>
 
     <section class="collection-section" id="collection">
       <div class="section-heading">
@@ -99,14 +105,21 @@
 
     <section class="studio-section" id="story">
       <div class="studio-image"><img src="studio.JPG" alt="Heidi painting outdoors beside an easel" /><span>Studio notes, Bristol</span></div>
-      <div class="studio-copy"><p class="eyebrow"></p><h2>About<br /><i>me</i></h2><p>I am a 20 year old artist based in Bristol. I have always had a passion for art and I love to create dream like and whimsical imagery. For most of my work, I use oil paint, put love to explore different mediums. I am so inspired by nature, femininity, and nostalgia, and I think this is reflected in my work. </p><p> I post a lot about my work and the behind the scenes on my social media, if you want to follow along!</p></div>
+      <div class="studio-copy"><p class="eyebrow"></p><h2>About<br /><i>me</i></h2><p>I am a 20 year old artist based in Bristol. I have always had a passion for art and I love to create dream like and whimsical imagery. For most of my work, I use oil paint, put love to explore different mediums. I am so inspired by nature, femininity, and nostalgia, and I think this is reflected in my work. </p><p> I post a lot about my work and the behind the scenes on my social media, if you want to follow along!</p><p>Contact me: artbyheidijoy@gmail.com</p></div>
     </section>
 
     <section class="newsletter" id="journal"><div><p class="eyebrow">sign up to hear about my next collections</p><h2>A nice thing<br /><i>in your inbox</i></h2></div><form id="newsletter-form"><label for="email">find out about upcoming releases</label><div class="email-row"><input id="email" type="email" placeholder="Your email address" required /><button type="submit" aria-label="Subscribe"><i data-lucide="arrow-up-right"></i></button></div><p class="form-message" id="form-message"></p></form></section>
   </main>
 
-  <footer class="site-footer"><a class="wordmark" href="#top">ART BY <em>HEIDI JOY</em></a><p>© 2026 ArtbyHeidiJoy</p><div><a href="https://www.instagram.com/artbyheidijoy/" target="_blank" rel="noopener noreferrer">Instagram</a><a href="https://www.tiktok.com/@artbyheidijoy" target="_blank" rel="noopener noreferrer">TikTok</a><a href="mailto:artbyheidijoy@gmail.com">artbyheidijoy@gmail.com</a><a href="#">Shipping + returns</a></div></footer>
+  <footer class="site-footer"><a class="wordmark" href="#top">ART BY <em>HEIDI JOY</em></a><p>© 2026 ArtbyHeidiJoy</p><div><a href="mailto:artbyheidijoy@gmail.com">artbyheidijoy@gmail.com</a></div></footer>
   <div hidden id="snipcart" data-api-key="OGM2NGNkNWUtY2NjZi00OTYzLTk1NjMtNDVkOTVlY2M0MGZlNjM5MjI5MzEzNjYzOTc2MTM0" data-config-modal-style="side" data-currency="gbp"></div>
+  <script>
+    
+    window.SnipcartSettings = {
+      publicApiKey: 'OGM2NGNkNWUtY2NjZi00OTYzLTk1NjMtNDVkOTVlY2M0MGZlNjM5MjI5MzEzNjYzOTc2MTM0',
+      loadStrategy: 'on-user-interaction'
+    };
+  </script>
   <script async src="https://cdn.snipcart.com/themes/v3.3.1/default/snipcart.js"></script>
   <script src="script.js"></script>
 </body>

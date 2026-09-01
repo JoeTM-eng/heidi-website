@@ -28,17 +28,20 @@ function configureSnipcartProduct(card) {
   const button = card.querySelector('.quick-add');
   const activeOption = card.querySelector('.art-option.active');
   const kind = activeOption.dataset.kind;
-  const sizeSelect = card.querySelector('.print-size select');
-  const price = kind === 'original' ? Number(card.dataset.priceOriginal) : Number(sizeSelect.value);
-  const size = kind === 'print' ? sizeSelect.options[sizeSelect.selectedIndex].text : '';
+  const sizePicker = card.querySelector('.print-size');
+  const sizeSelect = sizePicker ? sizePicker.querySelector('select') : null;
+  const selectedSizeText = sizeSelect && sizeSelect.selectedIndex >= 0 ? sizeSelect.options[sizeSelect.selectedIndex].text : '';
+  const price = kind === 'original' ? Number(card.dataset.priceOriginal || 0) : Number(sizeSelect ? sizeSelect.value : 0);
+  const sizeLabel = kind === 'print' ? selectedSizeText : '';
 
+  button.type = 'button';
   button.classList.add('snipcart-add-item');
   button.dataset.itemId = `${card.dataset.id}-${kind}`;
-  button.dataset.itemPrice = price;
+  button.dataset.itemPrice = String(price);
   button.dataset.itemUrl = window.location.href.split('#')[0];
-  button.dataset.itemDescription = kind === 'original' ? 'Original artwork' : `Archival print · ${size}`;
+  button.dataset.itemDescription = kind === 'original' ? 'Original artwork' : `Archival print · ${sizeLabel}`;
   button.dataset.itemImage = card.dataset.image;
-  button.dataset.itemName = `${card.dataset.title} · ${kind === 'original' ? 'Original' : `Print · ${size}`}`;
+  button.dataset.itemName = `${card.dataset.title || card.querySelector('h3')?.textContent || 'Artwork'}${kind === 'original' ? ' · Original' : ` · Print · ${sizeLabel}`}`;
   button.dataset.itemQuantity = '1';
   button.dataset.itemShippable = 'true';
 }
