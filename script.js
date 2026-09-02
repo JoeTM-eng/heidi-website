@@ -1,11 +1,13 @@
 const artCards = document.querySelectorAll('.art-card');
 artCards.forEach((card) => { card.dataset.collection = card.dataset.collection || 'dreams'; });
 const artworkNames = { '1': 'dusk', '2': 'dawn', '3': 'a dream', '4': 'april in bloom', '5': 'animal friends' };
+const originalDimensions = { '1': '36cm x 28cm', '2': '36cm x 28cm', '3': '45.5cm x 36cm', '4': '30cm x 23cm', '9': '10cm x 10cm', '10': '10cm x 10cm', '11': '10cm x 10cm', '12': '10cm x 10cm', '13': '10cm x 10cm', '14': '10cm x 10cm' };
 artCards.forEach((card) => {
-  const name = artworkNames[card.dataset.id];
+  const name = artworkNames[card.dataset.id] || card.dataset.title;
   if (!name) return;
   card.dataset.title = name;
-  card.querySelector('.art-meta h3').textContent = name;
+  const dimensions = originalDimensions[card.dataset.id];
+  card.querySelector('.art-meta h3').textContent = dimensions ? `${name} (${dimensions})` : name;
   const kind = card.querySelector('.art-option.active').dataset.kind;
   card.querySelector('.quick-add').setAttribute('aria-label', `Add ${name} ${kind} to bag`);
 });
