@@ -38,7 +38,7 @@ function configureSnipcartProduct(card) {
   const pageUrl = new URL(window.location.href.split('#')[0]);
   const imageUrl = card.dataset.image ? new URL(card.dataset.image, pageUrl.href).href : pageUrl.href;
   const productTitle = card.dataset.title || card.querySelector('h3')?.textContent || 'Artwork';
-  const stableItemId = `art-${String(card.dataset.id).padStart(3, '0')}`;
+  const stableItemId = button.dataset.itemId || `art-${String(card.dataset.id).padStart(3, '0')}`;
 
   button.type = 'button';
   button.classList.add('snipcart-add-item');
@@ -47,7 +47,7 @@ function configureSnipcartProduct(card) {
   button.dataset.itemUrl = pageUrl.href;
   button.dataset.itemDescription = kind === 'original' ? 'Original artwork' : `Archival print - ${selectedSizeText}`;
   button.dataset.itemImage = imageUrl;
-  button.dataset.itemName = productTitle;
+  button.dataset.itemName = button.dataset.itemName || productTitle;
   button.dataset.itemQuantity = '1';
   button.dataset.itemShippable = 'true';
 }
