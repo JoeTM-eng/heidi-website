@@ -45,7 +45,7 @@ function configureSnipcartProduct(card) {
   button.dataset.itemId = stableItemId;
   button.dataset.itemPrice = String(price);
   button.dataset.itemUrl = pageUrl.href;
-  button.dataset.itemDescription = kind === 'original' ? 'Original artwork' : `Archival print - ${selectedSizeText}`;
+  button.dataset.itemDescription = kind === 'original' ? 'Original artwork' : 'Archival print';
   button.dataset.itemImage = imageUrl;
   button.dataset.itemName = button.dataset.itemName || productTitle;
   button.dataset.itemQuantity = '1';
