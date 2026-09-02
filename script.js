@@ -38,10 +38,12 @@ function configureSnipcartProduct(card) {
   const pageUrl = new URL(window.location.href.split('#')[0]);
   const imageUrl = card.dataset.image ? new URL(card.dataset.image, pageUrl.href).href : pageUrl.href;
   const productTitle = card.dataset.title || card.querySelector('h3')?.textContent || 'Artwork';
-  const stableItemId = button.dataset.itemId || `art-${String(card.dataset.id).padStart(3, '0')}`;
+  const baseItemId = button.dataset.baseItemId || button.dataset.itemId || `art-${String(card.dataset.id).padStart(3, '0')}`;
+  const stableItemId = kind === 'original' ? baseItemId.split('-print-')[0] : `${baseItemId.split('-print-')[0]}-print-${price}`;
 
   button.type = 'button';
   button.classList.add('snipcart-add-item');
+  button.dataset.baseItemId = baseItemId.split('-print-')[0];
   button.dataset.itemId = stableItemId;
   button.dataset.itemPrice = String(price);
   button.dataset.itemUrl = pageUrl.href;
